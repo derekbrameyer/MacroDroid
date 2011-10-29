@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">MacroDroid</string>
+    <string name="kCal_day">kCal/day</string>
+    <string name="deficit">deficit</string>
+    <string name="protein">protein</string>
+    <string name="carbs">carbs</string>
+    <string name="fat">fat</string>
+    <string name="Macros">Macros</string>
+    <string name="Measurements">Measurements</string>
+    <string name="main_activity_today">Today</string>
+    <string name="main_activity_previous">Previous</string>
+    <string name="main_activity_my_foods">My Foods</string>
+    <string name="main_activity_my_macros">My Macros</string>
+    <string name="main_activity_settings">Settings/Info/FAQ</string>
+    <string name="my_macros_calculate">Calculate my macros!</string>
+    <string name="my_macros_i_know">I know my macros!</string>
+    <string name="my_macros_no_input">You have not inputted or calculated your macros.  Please select one of the buttons below to do so.</string>
+    <string name="my_macros_kCal_day">kCal/day</string>
+    <string name="my_macros_deficit">deficit [kCal]</string>
+    <string name="my_macros_protein">protein [g]</string>
+    <string name="my_macros_carbs">carbs [g]</string>
+    <string name="my_macros_fat">fat [g]</string>
+
+</resources>

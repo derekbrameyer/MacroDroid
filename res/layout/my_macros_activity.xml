@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center|center_vertical" >
+
+    <LinearLayout
+        android:id="@+id/LL_button_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/BTN_calculate"
+            style="@style/WideButtons"
+            android:text="@string/my_macros_calculate" />
+
+        <Button
+            android:id="@+id/BTN_i_know"
+            style="@style/WideButtons"
+            android:text="@string/my_macros_i_know" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/LL_button_container"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center|center_vertical"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/TV_no_input"
+                style="@style/CenteredHeaderTV"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/my_macros_no_input" />
+
+            <TableLayout
+                android:id="@+id/TL_macros"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/Macros"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_kCal_day" />
+
+                    <TextView
+                        android:id="@+id/TV_kCal"
+                        style="@style/MyMacrosRightColumnTL"
+                        android:text="2500" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_deficit" />
+
+                    <TextView
+                        android:id="@+id/TV_deficit"
+                        style="@style/MyMacrosRightColumnTL"
+                        android:text="700" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_protein" />
+
+                    <TextView
+                        android:id="@+id/TV_protein"
+                        style="@style/MyMacrosRightColumnTL"
+                        android:text="250" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_carbs" />
+
+                    <TextView
+                        android:id="@+id/TV_carbs"
+                        style="@style/MyMacrosRightColumnTL"
+                        android:text="250" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_fat" />
+
+                    <TextView
+                        android:id="@+id/TV_fat"
+                        style="@style/MyMacrosRightColumnTL"
+                        android:text="50" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

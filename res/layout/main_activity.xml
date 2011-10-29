@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center|center_vertical" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center|center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/CenteredHeaderTV"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/app_name" />
+
+        <Button
+            android:id="@+id/BTN_today"
+            style="@style/MainButtons"
+            android:text="@string/main_activity_today" />
+
+        <Button
+            android:id="@+id/BTN_previous"
+            style="@style/MainButtons"
+            android:text="@string/main_activity_previous" />
+
+        <Button
+            android:id="@+id/BTN_my_foods"
+            style="@style/MainButtons"
+            android:text="@string/main_activity_my_foods" />
+
+        <Button
+            android:id="@+id/BTN_my_macros"
+            style="@style/MainButtons"
+            android:text="@string/main_activity_my_macros" />
+
+        <Button
+            android:id="@+id/BTN_settings"
+            style="@style/MainButtons"
+            android:text="@string/main_activity_settings" />
+    </LinearLayout>
+
+</ScrollView>
