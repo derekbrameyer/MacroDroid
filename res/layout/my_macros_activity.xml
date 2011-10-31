@@ -40,12 +40,14 @@
                 style="@style/CenteredHeaderTV"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="40dp"
+                android:visibility="gone"
                 android:text="@string/my_macros_no_input" />
 
             <TableLayout
                 android:id="@+id/TL_macros"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:visibility="gone" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -59,12 +61,24 @@
 
                     <TextView
                         style="@style/MyMacrosLeftColumnTL"
-                        android:text="@string/my_macros_kCal_day" />
+                        android:text="@string/my_macros_training_kCal_day" />
 
                     <TextView
-                        android:id="@+id/TV_kCal"
+                        android:id="@+id/TV_training_kCal"
                         style="@style/MyMacrosRightColumnTL"
                         android:text="2500" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_rest_kCal_day" />
+
+                    <TextView
+                        android:id="@+id/TV_rest_kCal"
+                        style="@style/MyMacrosRightColumnTL"
+                        android:text="2100" />
                 </TableRow>
 
                 <TableRow >

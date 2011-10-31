@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="ThreeColumnCenteredTV">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="ThreeColumnCenteredET">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center|center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="MyMacrosIKnowRightColumnET">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:gravity">center|center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">phone</item>
+        <item name="android:imeOptions">actionNext|flagNoEnterAction</item>
+    </style>
+
     <style name="MyMacrosRightColumnTL">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -9,7 +39,9 @@
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>
         <item name="android:paddingTop">5dp</item>
-        <item name="android:gravity">right</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="MyMacrosLeftColumnTL">
@@ -21,6 +53,7 @@
         <item name="android:paddingRight">10dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:gravity">right</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="CenteredHeaderTV">
@@ -40,6 +73,21 @@
         <item name="android:paddingLeft">20dp</item>
         <item name="android:paddingRight">20dp</item>
         <item name="android:paddingTop">20dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TwoColumnButtons">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingTop">15dp</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>

@@ -31,26 +31,24 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                }
+            }
         });
         previousBTN.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                }
+            }
         });
         myFoodsBTN.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                }
+                startActivity(new Intent(MainActivity.this, MyFoodsActivity.class));
+            }
         });
         myMacrosBTN.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 startActivity(new Intent(MainActivity.this, MyMacrosActivity.class));
             }
         });
@@ -59,7 +57,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                }
+            }
         });
     }
 }

@@ -10,6 +10,6 @@ public class MyMacrosCalculateActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_macros_activity);
+        setContentView(R.layout.my_macros_calculate_activity);
     }
 }

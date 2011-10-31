@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center|center_vertical" >
+
+    <LinearLayout
+        android:id="@+id/LL_button_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/BTN_set"
+            style="@style/TwoColumnButtons"
+            android:text="@string/Set" />
+
+        <Button
+            android:id="@+id/BTN_cancel"
+            style="@style/TwoColumnButtons"
+            android:text="@string/Cancel" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/LL_button_container"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center|center_vertical"
+            android:orientation="vertical" >
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    style="@style/CenteredHeaderTV"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/Macros" />
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_training_kCal_day" />
+
+                    <EditText
+                        android:id="@+id/ET_training_kCal"
+                        style="@style/MyMacrosIKnowRightColumnET" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_rest_kCal_day" />
+
+                    <EditText
+                        android:id="@+id/ET_rest_kCal"
+                        style="@style/MyMacrosIKnowRightColumnET" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_deficit" />
+
+                    <EditText
+                        android:id="@+id/ET_deficit"
+                        style="@style/MyMacrosIKnowRightColumnET" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_protein" />
+
+                    <EditText
+                        android:id="@+id/ET_protein"
+                        style="@style/MyMacrosIKnowRightColumnET" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_carbs" />
+
+                    <EditText
+                        android:id="@+id/ET_carbs"
+                        style="@style/MyMacrosIKnowRightColumnET" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/my_macros_fat" />
+
+                    <EditText
+                        android:id="@+id/ET_fat"
+                        style="@style/MyMacrosIKnowRightColumnET" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    style="@style/CenteredHeaderTV"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/Macro_Conversions" />
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/protein" />
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/carbs" />
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/fat" />
+                </TableRow>
+
+                <TableRow >
+
+                    <EditText
+                        android:id="@+id/ET_protein_conversion"
+                        style="@style/ThreeColumnCenteredET" />
+
+                    <EditText
+                        android:id="@+id/ET_carbs_conversion"
+                        style="@style/ThreeColumnCenteredET" />
+
+                    <EditText
+                        android:id="@+id/ET_fat_conversion"
+                        style="@style/ThreeColumnCenteredET" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:text="@string/kCal_g" />
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
