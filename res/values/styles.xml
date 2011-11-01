@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="FullHeightDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="ThreeColumnCenteredTV">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center|center_vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center|center_vertical"
+            android:orientation="vertical" >
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    style="@style/CenteredHeaderTV"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Add_Food" />
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/Name" />
+
+                    <EditText
+                        android:id="@+id/ET_add_food_name"
+                        style="@style/MyMacrosIKnowRightColumnET" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/Serving_Size" />
+
+                    <EditText
+                        android:id="@+id/ET_add_food_serving_size"
+                        style="@style/MyMacrosIKnowRightColumnET" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/kCal" />
+
+                    <EditText
+                        android:id="@+id/ET_add_food_kCal"
+                        style="@style/MyMacrosIKnowRightColumnET" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    style="@style/CenteredHeaderTV"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Macros" />
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/protein" />
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/carbs" />
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/fat" />
+                </TableRow>
+
+                <TableRow >
+
+                    <EditText
+                        android:id="@+id/ET_add_food_protein"
+                        style="@style/ThreeColumnCenteredET" />
+
+                    <EditText
+                        android:id="@+id/ET_add_food_carbs"
+                        style="@style/ThreeColumnCenteredET" />
+
+                    <EditText
+                        android:id="@+id/ET_add_food_fat"
+                        style="@style/ThreeColumnCenteredET" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:text="@string/grams"
+                    android:textSize="14sp" />
+            </TableLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_button_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/BTN_save"
+                    style="@style/TwoColumnButtons"
+                    android:text="@string/Save" />
+
+                <Button
+                    android:id="@+id/BTN_cancel"
+                    style="@style/TwoColumnButtons"
+                    android:text="@string/Cancel" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

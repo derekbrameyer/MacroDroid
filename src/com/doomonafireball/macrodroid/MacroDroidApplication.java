@@ -6,15 +6,20 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class MacroDroidApplication extends Application {
     private static final String MACROS_PREFS = "MacroDroidMacrosPrefs";
     public SharedPreferences macrosPrefs;
     public SharedPreferences.Editor macrosPrefsEditor;
+    private Db4oHelper dbHelper;
 
     @Override
     public void onCreate() {
@@ -35,6 +40,31 @@ public class MacroDroidApplication extends Application {
                     DefaultValues.MACRO_CONVERSION_FAT);
             macrosPrefsEditor.commit();
         }
+    }
+    
+    public boolean hasData(Context ctx) {
+        dbHelper = new Db4oHelper(ctx);
+        if (dbHelper.fetchAllDayRows().isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public void deleteDatabase() {
+        dbHelper.deleteDatabase();
+    }
+    
+    public void saveDay(ADay day) {
+        dbHelper.saveDay(day);
+    }
+    
+    public List<ADay> getDaysFromDb() {
+        return dbHelper.fetchAllDayRows();
+    }
+    
+    public List<ADay> getADayForCalendar(Calendar cal) {
+        return dbHelper.fetchExercisesForDate(cal);
     }
 
     public byte[] readInternalStoragePrivate(String filename) {
@@ -75,6 +105,66 @@ public class MacroDroidApplication extends Application {
         }
     }
     
+    public void writeFoodsToInternalStorage(ArrayList<AFood> foods) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            for (int i = 0; i < foods.size(); i++) {
+                AFood f = foods.get(i);
+                Log.d(Tags.LOG_TAG, "Writing Name: " + f.getFoodName());
+                Log.d(Tags.LOG_TAG, "Writing Serving size: " + f.getFoodServingSize());
+                Log.d(Tags.LOG_TAG, "Writing kCal: " + f.getFoodKCal());
+                Log.d(Tags.LOG_TAG, "Writing Protein: " + f.getFoodGramsProtein());
+                Log.d(Tags.LOG_TAG, "Writing Carbs: " + f.getFoodGramsCarbs());
+                Log.d(Tags.LOG_TAG, "Writing Fat: " + f.getFoodGramsFat());                
+                baos.write(foodToByteArray(f));
+            }
+            byte[] newFoodList = baos.toByteArray();
+            writeInternalStoragePrivate(Tags.MY_FOODS_FILENAME, newFoodList);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void addFoodToInternalStorage(AFood food) {
+        try {
+            byte[] retChar = "\n".getBytes();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            baos.write(readInternalStoragePrivate(Tags.MY_FOODS_FILENAME));
+            baos.write(foodToByteArray(food));
+            byte[] newFoodList = baos.toByteArray();
+            writeInternalStoragePrivate(Tags.MY_FOODS_FILENAME, newFoodList);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public byte[] foodToByteArray(AFood food) {
+        try {
+            byte[] retChar = "\n".getBytes();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            baos.write(food.getFoodName().getBytes());
+            baos.write(retChar);
+            baos.write(food.getFoodServingSize().getBytes());
+            baos.write(retChar);
+            baos.write(Float.toString(food.getFoodKCal()).getBytes());
+            baos.write(retChar);
+            baos.write(Float.toString(food.getFoodGramsProtein()).getBytes());
+            baos.write(retChar);
+            baos.write(Float.toString(food.getFoodGramsCarbs()).getBytes());
+            baos.write(retChar);
+            baos.write(Float.toString(food.getFoodGramsFat()).getBytes());
+            baos.write(retChar);
+            baos.write(retChar);
+            return baos.toByteArray();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public byte[] defaultFoodsToByteArray() {
         int len = 1024;
         byte[] buffer = new byte[len];
