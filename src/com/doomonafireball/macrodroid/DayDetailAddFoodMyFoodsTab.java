@@ -74,19 +74,12 @@ public class DayDetailAddFoodMyFoodsTab extends Activity {
 								Float servingsValue = Float.parseFloat(input
 										.getText().toString());
 								// Do something with value!
-								ArrayList<AFood> mFoods = mADay.getFoods();
-								ArrayList<Float> mServings = mADay
-										.getServings();
+								ArrayList<Pair<Float, AFood>> mFoods = mADay.getFoods();
 								if (mFoods == null) {
-									mFoods = new ArrayList<AFood>();
+									mFoods = new ArrayList<Pair<Float, AFood>>();
 								}
-								if (mServings == null) {
-									mServings = new ArrayList<Float>();
-								}
-								mFoods.add(selectedFood);
-								mServings.add(servingsValue);
+								mFoods.add(new Pair<Float, AFood>(servingsValue, selectedFood));
 								mADay.setFoods(mFoods);
-								mADay.setServings(mServings);
 								application.saveDay(mADay);
 								// Just changing stuff to re-run
 								finish();

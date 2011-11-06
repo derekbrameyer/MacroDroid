@@ -12,15 +12,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class DayDetailFoodsAdapter extends BaseAdapter {
-    private ArrayList<AFood> foods;
-    private ArrayList<Float> servings;
+    private ArrayList<Pair<Float, AFood>> foods;
     private Context mContext;
 
-    public DayDetailFoodsAdapter(Context context, ArrayList<AFood> foods, ArrayList<Float> servings) {
+    public DayDetailFoodsAdapter(Context context, ArrayList<Pair<Float, AFood>> foods) {
         super();
         this.mContext = context;
         this.foods = foods;
-        this.servings = servings;
     }
     
     @Override
@@ -30,8 +28,7 @@ public class DayDetailFoodsAdapter extends BaseAdapter {
     
     @Override
     public Object getItem(int i) {
-    	Pair<Float, AFood> pair = new Pair<Float, AFood>(servings.get(i), foods.get(i));
-        return pair;
+    	return foods.get(i);
     }
     
     @Override
@@ -54,8 +51,9 @@ public class DayDetailFoodsAdapter extends BaseAdapter {
         TextView carbsTV = (TextView) convertView.findViewById(R.id.TV_food_list_item_carbs_value);
         TextView fatTV = (TextView) convertView.findViewById(R.id.TV_food_list_item_fat_value);
         
-        AFood food = (AFood) foods.get(position);
-        Float serving = (Float) servings.get(position);
+        Pair<Float, AFood> pair = foods.get(position);
+        Float serving = pair.first;
+        AFood food = pair.second;
         
         nameTV.setText(food.getFoodName());
         kCalTV.setText(Float.toString(serving * food.getFoodKCal()));

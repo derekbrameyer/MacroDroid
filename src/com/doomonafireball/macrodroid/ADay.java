@@ -8,8 +8,7 @@ import android.util.Pair;
 
 public class ADay implements Comparable<ADay> {
 	public long id;
-	private ArrayList<AFood> foods;
-	private ArrayList<Float> servings;
+	private ArrayList<Pair<Float, AFood>> foods;
 	private Calendar date;
 	private boolean isTraining;
 	private float weight;
@@ -24,8 +23,7 @@ public class ADay implements Comparable<ADay> {
 	public ADay(Calendar date, boolean isTraining) {
 		this.date = date;
 		this.isTraining = isTraining;
-		foods = new ArrayList<AFood>();
-		servings = new ArrayList<Float>();
+		foods = new ArrayList<Pair<Float, AFood>>();
 	}
 
 	public float getWeight() {
@@ -53,20 +51,12 @@ public class ADay implements Comparable<ADay> {
 		this.isTraining = isTraining;
 	}
 
-	public ArrayList<AFood> getFoods() {
+	public ArrayList<Pair<Float, AFood>> getFoods() {
 		return foods;
 	}
 
-	public void setFoods(ArrayList<AFood> foods) {
+	public void setFoods(ArrayList<Pair<Float, AFood>> foods) {
 		this.foods = foods;
-	}
-	
-	public ArrayList<Float> getServings() {
-		return servings;
-	}
-	
-	public void setServings(ArrayList<Float> servings) {
-		this.servings = servings;
 	}
 
 	public Calendar getDate() {
@@ -96,8 +86,9 @@ public class ADay implements Comparable<ADay> {
 		retVal += "foods:" + "\n";
 		if (foods != null) {
 			for (int i = 0; i < foods.size(); i++) {
-				Float serving = servings.get(i);
-				AFood food = foods.get(i);
+				Pair<Float, AFood> pair = foods.get(i);
+				Float serving = pair.first;
+				AFood food = pair.second;
 				retVal += "servings: " + Float.toString(serving) + ", food: "
 						+ food.getFoodName() + "\n";
 			}			

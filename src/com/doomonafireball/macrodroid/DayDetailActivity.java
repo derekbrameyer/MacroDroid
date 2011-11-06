@@ -88,12 +88,9 @@ public class DayDetailActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> av, View v, int position, long id) {
 			// TODO Auto-generated method stub
-			ArrayList<AFood> mFoods = mADay.getFoods();
-			ArrayList<Float> mServings = mADay.getServings();
+			ArrayList<Pair<Float, AFood>> mFoods = mADay.getFoods();
 			mFoods.remove(position);
-			mServings.remove(position);
 			mADay.setFoods(mFoods);
-			mADay.setServings(mServings);
 			application.saveDay(mADay);
 			refreshViews();
 		}
@@ -111,54 +108,52 @@ public class DayDetailActivity extends Activity {
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 		dateTV.setText(sdf.format(mADay.getDate().getTime()));
 
-		// Refresh the ListView
-		ArrayList<AFood> mFoods = mADay.getFoods();
-		ArrayList<Float> mServings = mADay.getServings();
+		// Refresh the Views
+		float totalKCal = 0.0f;
+		float totalProtein = 0.0f;
+		float totalCarbs = 0.0f;
+		float totalFat = 0.0f;
+
+		ArrayList<Pair<Float, AFood>> mFoods = mADay.getFoods();
 		if (mFoods != null) {
 			if (mFoods.isEmpty()) {
 				noFoodsYetTV.setVisibility(View.VISIBLE);
 			} else {
 				noFoodsYetTV.setVisibility(View.GONE);
-				mFoodsAdapter = new DayDetailFoodsAdapter(mContext, mFoods,
-						mServings);
+				mFoodsAdapter = new DayDetailFoodsAdapter(mContext, mFoods);
 				mFoodsLV.setAdapter(mFoodsAdapter);
 
-				// Refresh the calculations
-				float totalKCal = 0.0f;
-				float totalProtein = 0.0f;
-				float totalCarbs = 0.0f;
-				float totalFat = 0.0f;
-
 				for (int i = 0; i < mFoods.size(); i++) {
-					AFood food = (AFood) mFoods.get(i);
-					Float servings = (Float) mServings.get(i);
+					Pair<Float, AFood> pair = mFoods.get(i);
+					Float servings = pair.first;
+					AFood food = pair.second;
 
 					totalKCal += (servings * food.getFoodKCal());
 					totalProtein += (servings * food.getFoodGramsProtein());
 					totalCarbs += (servings * food.getFoodGramsCarbs());
 					totalFat += (servings * food.getFoodGramsFat());
 				}
-
-				caloriesTV.setText(Float.toString(totalKCal)
-						+ "/"
-						+ Float.toString(application.macrosPrefs.getFloat(
-								Tags.MACROS_TRAINING_KCAL, 0.0f)) + " kCal");
-				currentProteinTV.setText(Float.toString(totalProtein));
-				currentCarbsTV.setText(Float.toString(totalCarbs));
-				currentFatTV.setText(Float.toString(totalFat));
-				macroProteinTV.setText("of "
-						+ Float.toString(application.macrosPrefs.getFloat(
-								Tags.MACROS_PROTEIN, 0.0f)) + "g");
-				macroCarbsTV.setText("of "
-						+ Float.toString(application.macrosPrefs.getFloat(
-								Tags.MACROS_CARBS, 0.0f)) + "g");
-				macroFatTV.setText("of "
-						+ Float.toString(application.macrosPrefs.getFloat(
-								Tags.MACROS_FAT, 0.0f)) + "g");
 			}
 		} else {
 			noFoodsYetTV.setVisibility(View.VISIBLE);
 		}
+
+		caloriesTV.setText(Float.toString(totalKCal)
+				+ "/"
+				+ Float.toString(application.macrosPrefs.getFloat(
+						Tags.MACROS_TRAINING_KCAL, 0.0f)) + " kCal");
+		currentProteinTV.setText(Float.toString(totalProtein));
+		currentCarbsTV.setText(Float.toString(totalCarbs));
+		currentFatTV.setText(Float.toString(totalFat));
+		macroProteinTV.setText("of "
+				+ Float.toString(application.macrosPrefs.getFloat(
+						Tags.MACROS_PROTEIN, 0.0f)) + "g");
+		macroCarbsTV.setText("of "
+				+ Float.toString(application.macrosPrefs.getFloat(
+						Tags.MACROS_CARBS, 0.0f)) + "g");
+		macroFatTV.setText("of "
+				+ Float.toString(application.macrosPrefs.getFloat(
+						Tags.MACROS_FAT, 0.0f)) + "g");
 
 		// TODO Set click listeners
 		addFoodBTN.setOnClickListener(new OnClickListener() {
