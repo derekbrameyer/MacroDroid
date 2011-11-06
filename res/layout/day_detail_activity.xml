@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center|top" >
+
+    <LinearLayout
+        android:id="@+id/LL_date_and_type"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TV_day_detail_date"
+            style="@style/CenteredHeaderTV"
+            android:layout_width="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="9/20/11" />
+
+        <Button
+            android:id="@+id/BTN_training_day"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1.0"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Training Day"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/TV_day_detail_calories"
+        style="@style/CenteredHeaderTV"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/LL_date_and_type"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="1000/2000 kCal" />
+
+    <LinearLayout
+        android:id="@+id/LL_macro_labels"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TV_day_detail_calories"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/ThreeColumnCenteredTV"
+            android:text="@string/protein" />
+
+        <TextView
+            style="@style/ThreeColumnCenteredTV"
+            android:text="@string/carbs" />
+
+        <TextView
+            style="@style/ThreeColumnCenteredTV"
+            android:text="@string/fat" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_current_data"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LL_macro_labels"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TV_day_detail_current_protein"
+            style="@style/ThreeColumnCenteredTV"
+            android:text="50"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TV_day_detail_current_carbs"
+            style="@style/ThreeColumnCenteredTV"
+            android:text="50"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TV_day_detail_current_fat"
+            style="@style/ThreeColumnCenteredTV"
+            android:text="50"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_macro_data"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LL_current_data"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TV_day_detail_macro_protein"
+            style="@style/ThreeColumnCenteredTV"
+            android:text="of 250g" />
+
+        <TextView
+            android:id="@+id/TV_day_detail_macro_carbs"
+            style="@style/ThreeColumnCenteredTV"
+            android:text="of 250g" />
+
+        <TextView
+            android:id="@+id/TV_day_detail_macro_fat"
+            style="@style/ThreeColumnCenteredTV"
+            android:text="of 250g" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_actions_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LL_macro_data"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/BTN_pics"
+            style="@style/FourColumnButtons"
+            android:layout_weight="1.0"
+            android:text="PICS" />
+
+        <Button
+            android:id="@+id/BTN_weight"
+            style="@style/FourColumnButtons"
+            android:layout_weight="1.0"
+            android:text="WEIGHT" />
+
+        <Button
+            android:id="@+id/BTN_height"
+            style="@style/FourColumnButtons"
+            android:layout_weight="1.0"
+            android:text="HEIGHT" />
+
+        <Button
+            android:id="@+id/BTN_add_food"
+            style="@style/FourColumnButtons"
+            android:layout_weight="1.0"
+            android:text="FOOD" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/TV_todays_foods"
+        style="@style/CenteredHeaderTV"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/LL_actions_container"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/Todays_Foods" />
+
+    <ListView
+        android:id="@+id/LV_day_detail_foods"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TV_todays_foods" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/TV_no_foods_yet"
+        style="@style/CenteredHeaderTV"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/TV_todays_foods"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="@string/day_detail_activity_no_foods_yet" />
+
+</RelativeLayout>

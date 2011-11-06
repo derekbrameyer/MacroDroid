@@ -11,6 +11,7 @@
     <string name="kCal_day">kCal/day</string>
     <string name="kCal_g">kCal/g</string>
     <string name="protein">protein</string>
+    <string name="servings_of">servings of</string>
     <string name="Add">Add</string>
     <string name="Add_Food">Add Food</string>
     <string name="Cancel">Cancel</string>
@@ -23,7 +24,9 @@
     <string name="Save">Save</string>
     <string name="Serving_Size">Serving Size</string>
     <string name="Set">Set</string>
+    <string name="Todays_Foods">Today\'s Foods</string>
     <string name="Your_macros_have_been_saved">Your macros have been saved!</string>
+    <string name="day_detail_activity_no_foods_yet">You haven\'t added any foods yet!</string>
     <string name="main_activity_today">Today</string>
     <string name="main_activity_previous">Previous</string>
     <string name="main_activity_my_foods">My Foods</string>

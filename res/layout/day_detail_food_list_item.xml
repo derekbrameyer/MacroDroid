@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp" >
+
+    <TextView
+        android:id="@+id/TV_food_list_item_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="ASDTSADFKLJASDFLKASDFJLKSDAFJSLDKFJSDLKFJASDLFKJSADLFKJSDLFKJLKASDJFLSKADJF"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_kCal_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="4dp"
+        android:layout_below="@id/TV_food_list_item_name"
+        android:text="@string/my_foods_list_item_kCal_label"
+        android:textSize="12sp"
+        android:gravity="right" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_kCal_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_list_item_kCal_label"
+        android:layout_toLeftOf="@id/TV_food_list_item_kCal_label"
+        android:layout_below="@id/TV_food_list_item_name"
+        android:lines="1"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:gravity="right"
+        android:text="2500" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_num_servings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_list_item_kCal_label"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/TV_food_list_item_name"
+        android:lines="1"
+        android:text="2"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_servings_of"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_list_item_kCal_label"
+        android:layout_toRightOf="@id/TV_food_list_item_num_servings"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:lines="1"
+        android:text="@string/servings_of"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_serving_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_list_item_kCal_label"
+        android:layout_toRightOf="@id/TV_food_list_item_servings_of"
+        android:layout_below="@id/TV_food_list_item_name"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="100 grams"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_protein_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/TV_food_list_item_serving_size"
+        android:text="20"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_protein_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_list_item_protein_value"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_toRightOf="@id/TV_food_list_item_protein_value"
+        android:layout_below="@id/TV_food_list_item_serving_size"
+        android:text="@string/my_foods_list_item_protein_label"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_carbs_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_list_item_protein_value"
+        android:layout_toRightOf="@id/TV_food_list_item_protein_label"
+        android:layout_below="@id/TV_food_list_item_serving_size"
+        android:text="1000"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_carbs_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_list_item_protein_value"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_toRightOf="@id/TV_food_list_item_carbs_value"
+        android:layout_below="@id/TV_food_list_item_serving_size"
+        android:text="@string/my_foods_list_item_carbs_label"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_fat_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_list_item_protein_value"
+        android:layout_toRightOf="@id/TV_food_list_item_carbs_label"
+        android:layout_below="@id/TV_food_list_item_serving_size"
+        android:text="9001"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/TV_food_list_item_fat_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_list_item_protein_value"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@id/TV_food_list_item_fat_value"
+        android:layout_below="@id/TV_food_list_item_serving_size"
+        android:text="@string/my_foods_list_item_fat_label"
+        android:textSize="12sp" />
+
+</RelativeLayout>

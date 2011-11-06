@@ -24,9 +24,6 @@ public class MyFoodsActivity extends Activity {
     private MyFoodsAdapter myFoodsAdapter;
     private MacroDroidApplication application;
     private Context mContext;
-    private byte[] myFoodsByteArray;
-    private String myFoodsRaw;
-    private String[] myFoods;
     private ArrayList<AFood> myFoodsArrayList;
 
     /** Called when the activity is first created. */
@@ -91,36 +88,7 @@ public class MyFoodsActivity extends Activity {
     };
 
     private void refreshList() {
-        myFoodsByteArray = application.readInternalStoragePrivate(Tags.MY_FOODS_FILENAME);
-        myFoodsRaw = new String(myFoodsByteArray);
-        myFoods = myFoodsRaw.split("\\r?\\n");
-
-        // Parse the String array into an ArrayList<AFood>
-        myFoodsArrayList = new ArrayList<AFood>();
-        if (myFoods != null) {
-            if (myFoods.length > 5) {
-                for (int i = 0; i < myFoods.length; i += 7) {
-                    AFood food = new AFood();
-
-                    Log.d(Tags.LOG_TAG, "Name: " + myFoods[i]);
-                    Log.d(Tags.LOG_TAG, "Serving size: " + myFoods[i + 1]);
-                    Log.d(Tags.LOG_TAG, "kCal: " + myFoods[i + 2]);
-                    Log.d(Tags.LOG_TAG, "Protein: " + myFoods[i + 3]);
-                    Log.d(Tags.LOG_TAG, "Carbs: " + myFoods[i + 4]);
-                    Log.d(Tags.LOG_TAG, "Fat: " + myFoods[i + 5]);
-
-                    food.setFoodName(myFoods[i]);
-                    food.setFoodServingSize(myFoods[i + 1]);
-                    food.setFoodKCal(Float.parseFloat(myFoods[i + 2]));
-                    food.setFoodGramsProtein(Float.parseFloat(myFoods[i + 3]));
-                    food.setFoodGramsCarbs(Float.parseFloat(myFoods[i + 4]));
-                    food.setFoodGramsFat(Float.parseFloat(myFoods[i + 5]));
-
-                    myFoodsArrayList.add(food);
-                }                
-            }
-        }
-
+    	myFoodsArrayList = application.getAllFoods();
         myFoodsAdapter = new MyFoodsAdapter(mContext, myFoodsArrayList);
         myFoodsLV.setAdapter(myFoodsAdapter);
 

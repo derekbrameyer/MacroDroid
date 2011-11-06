@@ -48,9 +48,34 @@
         </activity>
         <activity
             android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:name=".DayDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:name=".DayDetailAddFoodNewFoodTab"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:name=".DayDetailAddFoodMyFoodsTab"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:configChanges="keyboardHidden|orientation"
             android:theme="@style/FullHeightDialog"
             android:label="@string/app_name"
             android:name=".MyFoodsAddActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:configChanges="keyboardHidden|orientation"
+            android:theme="@style/FullHeightDialog"
+            android:label="@string/app_name"
+            android:name=".DayDetailAddFoodTabActivity"
             android:screenOrientation="portrait" >
         </activity>
     </application>
