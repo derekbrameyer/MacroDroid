@@ -28,7 +28,8 @@
 
                     <EditText
                         android:id="@+id/ET_add_food_name"
-                        style="@style/MyMacrosIKnowRightColumnET" />
+                        style="@style/MyMacrosIKnowRightColumnET"
+                        android:inputType="textCapWords" />
                 </TableRow>
 
                 <TableRow >
@@ -39,6 +40,18 @@
 
                     <EditText
                         android:id="@+id/ET_add_food_serving_size"
+                        style="@style/MyMacrosIKnowRightColumnET"
+                        android:inputType="text" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/MyMacrosLeftColumnTL"
+                        android:text="@string/Number_of_Servings" />
+
+                    <EditText
+                        android:id="@+id/ET_add_food_num_servings"
                         style="@style/MyMacrosIKnowRightColumnET" />
                 </TableRow>
 
@@ -46,7 +59,7 @@
 
                     <TextView
                         style="@style/MyMacrosLeftColumnTL"
-                        android:text="@string/kCal" />
+                        android:text="@string/kCal_serving" />
 
                     <EditText
                         android:id="@+id/ET_add_food_kCal"
@@ -99,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:gravity="center"
-                    android:text="@string/grams"
+                    android:text="@string/grams_serving"
                     android:textSize="14sp" />
             </TableLayout>
 
@@ -110,9 +123,9 @@
                 android:orientation="horizontal" >
 
                 <Button
-                    android:id="@+id/BTN_save"
+                    android:id="@+id/BTN_add"
                     style="@style/TwoColumnButtons"
-                    android:text="@string/Save" />
+                    android:text="@string/Add" />
 
                 <Button
                     android:id="@+id/BTN_cancel"

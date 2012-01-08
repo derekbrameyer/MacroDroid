@@ -3,19 +3,24 @@ package com.doomonafireball.macrodroid;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -98,7 +103,7 @@ public class DayDetailActivity extends Activity {
 
 	private void renderDetailInfo() {
 		// First, fetch existing ADay object
-		fetchExistingADay();
+		mADay = application.safelyFetchExistingADay(mCalendar);
 
 		refreshViews();
 	}
@@ -155,7 +160,88 @@ public class DayDetailActivity extends Activity {
 				+ Float.toString(application.macrosPrefs.getFloat(
 						Tags.MACROS_FAT, 0.0f)) + "g");
 
-		// TODO Set click listeners
+		// Color text red if over
+		if (totalKCal > application.macrosPrefs.getFloat(
+				Tags.MACROS_TRAINING_KCAL, 0.0f)) {
+			caloriesTV.setTextColor(Color.RED);
+		}
+		if (totalProtein > application.macrosPrefs.getFloat(
+				Tags.MACROS_PROTEIN, 0.0f)) {
+			currentProteinTV.setTextColor(Color.RED);
+		}
+		if (totalCarbs > application.macrosPrefs.getFloat(Tags.MACROS_CARBS,
+				0.0f)) {
+			currentCarbsTV.setTextColor(Color.RED);
+		}
+		if (totalFat > application.macrosPrefs.getFloat(Tags.MACROS_FAT, 0.0f)) {
+			currentFatTV.setTextColor(Color.RED);
+		}
+
+		// Buttons
+		weightBTN.setText(Float.toString(mADay.getWeight()));
+		weightBTN.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+				alert.setTitle("Weight");
+				// Set an EditText view to get user input
+				final EditText input = new EditText(mContext);
+				input.setText("100.0");
+				alert.setView(input);
+				alert.setPositiveButton("Set",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								Float weight = Float.parseFloat(input.getText()
+										.toString());
+								mADay.setWeight(weight);
+								application.saveDay(mADay);
+								dialog.dismiss();
+								renderDetailInfo();
+							}
+						});
+				alert.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss();
+							}
+						});
+				alert.show();
+			}
+		});
+		heightBTN.setText(Float.toString(mADay.getHeight()));
+		heightBTN.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+				alert.setTitle("Height");
+				// Set an EditText view to get user input
+				final EditText input = new EditText(mContext);
+				input.setText("100.0");
+				alert.setView(input);
+				alert.setPositiveButton("Set",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								Float height = Float.parseFloat(input.getText()
+										.toString());
+								mADay.setHeight(height);
+								application.saveDay(mADay);
+								dialog.dismiss();
+								renderDetailInfo();
+							}
+						});
+				alert.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss();
+							}
+						});
+				alert.show();
+			}
+		});
 		addFoodBTN.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -191,30 +277,44 @@ public class DayDetailActivity extends Activity {
 		mFoodsLV.setOnItemClickListener(mFoodsItemClickListener);
 	}
 
-	private void fetchExistingADay() {
-		if (application.hasData(mContext)) {
-			// Try to find the ADay object
-			List<ADay> possibleCurrDays = application
-					.getADayForCalendar(mCalendar);
-			Log.d(Tags.LOG_TAG,
-					"possibleCurrDays length: " + possibleCurrDays.size());
-			if (!possibleCurrDays.isEmpty()) {
-				// We have a current object
-				Log.d(Tags.LOG_TAG, "We have a current day for today.");
-				mADay = possibleCurrDays.get(0);
-				Log.d(Tags.LOG_TAG, "Got day:\n" + mADay.toString());
-			} else {
-				// Instantiate a new object
-				Log.d(Tags.LOG_TAG, "We don't have a current day for today.");
-				mADay = new ADay(mCalendar, true);
-				application.saveDay(mADay);
+	private void saveToFoodGroup() {
+		AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+		alert.setTitle("Food Group Name");
+		// Set an EditText view to get user input
+		final EditText input = new EditText(mContext);
+		input.setText("");
+		alert.setView(input);
+		alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				String name = input.getText().toString();
+				AFoodGroup foodGroup = new AFoodGroup(name, mADay.getFoods());
+				application.saveFoodGroup(foodGroup);
+				dialog.dismiss();
 			}
-		} else {
-			// Instantiate a new object
-			Log.d(Tags.LOG_TAG,
-					"We don't even have data! AND We don't have a current day.");
-			mADay = new ADay(mCalendar, true);
-			application.saveDay(mADay);
+		});
+		alert.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						dialog.dismiss();
+					}
+				});
+		alert.show();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.day_detail_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.MENU_save_food_group:
+			saveToFoodGroup();
+			return false;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
 

@@ -23,7 +23,9 @@ public class ADay implements Comparable<ADay> {
 	public ADay(Calendar date, boolean isTraining) {
 		this.date = date;
 		this.isTraining = isTraining;
-		foods = new ArrayList<Pair<Float, AFood>>();
+		this.foods = new ArrayList<Pair<Float, AFood>>();
+		this.weight = 0.0f;
+		this.height = 0.0f;
 	}
 
 	public float getWeight() {

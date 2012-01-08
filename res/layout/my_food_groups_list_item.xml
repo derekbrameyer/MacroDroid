@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp" >
+
+    <TextView
+        android:id="@+id/TV_food_groups_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="ASDTSADFKLJASDFLKASDFJLKSDAFJSLDKFJSDLKFJASDLFKJSADLFKJSDLFKJLKASDJFLSKADJF"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/TV_food_groups_total_kCal_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="4dp"
+        android:layout_below="@id/TV_food_groups_name"
+        android:text="@string/my_food_groups_total_kCal_label"
+        android:textSize="12sp"
+        android:gravity="right" />
+    
+    <TextView
+        android:id="@+id/TV_food_groups_total_kCal_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_groups_total_kCal_label"
+        android:layout_toLeftOf="@id/TV_food_groups_total_kCal_label"
+        android:layout_below="@id/TV_food_groups_name"
+        android:lines="1"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:gravity="right"
+        android:text="2500" />
+    
+    <TextView
+        android:id="@+id/TV_food_groups_total_servings_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_groups_total_kCal_label"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/TV_food_groups_name"
+        android:lines="1"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:gravity="left"
+        android:text="2500" />
+    
+    <TextView
+        android:id="@+id/TV_food_groups_total_servings_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_groups_total_kCal_label"
+        android:layout_toRightOf="@id/TV_food_groups_total_servings_value"
+        android:layout_toLeftOf="@id/TV_food_groups_total_kCal_value"
+        android:layout_below="@id/TV_food_groups_name"
+        android:layout_marginLeft="4dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/total_servings"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/TV_food_groups_total_protein_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/TV_food_groups_total_servings_value"
+        android:text="20"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/TV_food_groups_total_protein_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_groups_total_protein_value"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_toRightOf="@id/TV_food_groups_total_protein_value"
+        android:layout_below="@id/TV_food_groups_total_servings_value"
+        android:text="@string/my_food_groups_total_protein_label"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/TV_food_groups_total_carbs_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_groups_total_protein_value"
+        android:layout_toRightOf="@id/TV_food_groups_total_protein_label"
+        android:layout_below="@id/TV_food_groups_total_servings_value"
+        android:text="1000"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/TV_food_groups_total_carbs_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_groups_total_protein_value"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_toRightOf="@id/TV_food_groups_total_carbs_value"
+        android:layout_below="@id/TV_food_groups_total_servings_value"
+        android:text="@string/my_food_groups_total_carbs_label"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/TV_food_groups_total_fat_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_groups_total_protein_value"
+        android:layout_toRightOf="@id/TV_food_groups_total_carbs_label"
+        android:layout_below="@id/TV_food_groups_total_servings_value"
+        android:text="9001"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/TV_food_groups_total_fat_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/TV_food_groups_total_protein_value"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@id/TV_food_groups_total_fat_value"
+        android:layout_below="@id/TV_food_groups_total_servings_value"
+        android:text="@string/my_food_groups_total_fat_label"
+        android:textSize="12sp" />
+
+</RelativeLayout>

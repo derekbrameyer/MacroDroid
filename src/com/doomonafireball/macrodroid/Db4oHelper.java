@@ -42,6 +42,8 @@ public class Db4oHelper {
 		// Configure the behavior of the database
 		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
 		configuration.common().objectClass(ADay.class).cascadeOnUpdate(true);
+		configuration.common().objectClass(AFoodGroup.class)
+				.cascadeOnUpdate(true);
 		// configuration.common().objectClass(ADay.class).objectField("id")
 		// .indexed(true);
 		return configuration;
@@ -64,11 +66,27 @@ public class Db4oHelper {
 		new File(db4oDBFullPath(mContext)).delete();
 	}
 
+	public void saveFoodGroup(AFoodGroup foodGroup) {
+		if (foodGroup.id == 0) {
+			foodGroup.id = getNextId();
+		}
+		db().store(foodGroup);
+		db().commit();
+	}
+
 	public void saveDay(ADay day) {
 		if (day.id == 0) {
 			day.id = getNextId();
 		}
 		db().store(day);
+		db().commit();
+	}
+
+	public void deleteFoodGroup(long id) {
+		ObjectSet<AFoodGroup> result = fetchFoodGroupsById(id);
+		while (result.hasNext()) {
+			db().delete((AFoodGroup) result.next());
+		}
 		db().commit();
 	}
 
@@ -80,6 +98,15 @@ public class Db4oHelper {
 		db().commit();
 	}
 
+	public AFoodGroup fetchFoodGroupById(long id) {
+		ObjectSet<AFoodGroup> result = fetchFoodGroupsById(id);
+		if (result.hasNext()) {
+			return (AFoodGroup) result.next();
+		} else {
+			return null;
+		}
+	}
+
 	public ADay fetchDayById(long id) {
 		ObjectSet<ADay> result = fetchDaysById(id);
 		if (result.hasNext()) {
@@ -89,9 +116,18 @@ public class Db4oHelper {
 		}
 	}
 
+	public int countFoodGroups(long id) {
+		ObjectSet<AFoodGroup> foodGroups = fetchFoodGroupsById(id);
+		return foodGroups == null ? 0 : foodGroups.size();
+	}
+
 	public int countDays(long id) {
 		ObjectSet<ADay> days = fetchDaysById(id);
 		return days == null ? 0 : days.size();
+	}
+
+	public List<AFoodGroup> fetchAllFoodGroupRows() {
+		return db().query(AFoodGroup.class);
 	}
 
 	public List<ADay> fetchAllDayRows() {
@@ -122,6 +158,12 @@ public class Db4oHelper {
 			}
 		});
 		return result;
+	}
+
+	private ObjectSet<AFoodGroup> fetchFoodGroupsById(long id) {
+		AFoodGroup foodGroup = new AFoodGroup(id);
+		foodGroup.id = id;
+		return db().queryByExample(foodGroup);
 	}
 
 	private ObjectSet<ADay> fetchDaysById(long id) {

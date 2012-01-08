@@ -42,9 +42,21 @@ public class MacroDroidApplication extends Application {
 		}
 	}
 
-	public boolean hasData(Context ctx) {
+	public boolean hasDayData(Context ctx) {
 		dbHelper = new Db4oHelper(ctx);
 		if (dbHelper.fetchAllDayRows().isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean hasFoodGroupData(Context ctx) {
+		dbHelper = new Db4oHelper(ctx);
+		if (dbHelper.fetchAllFoodGroupRows() == null) {
+			return true;
+		}
+		if (dbHelper.fetchAllFoodGroupRows().isEmpty()) {
 			return false;
 		} else {
 			return true;
@@ -59,46 +71,84 @@ public class MacroDroidApplication extends Application {
 		Log.d(Tags.LOG_TAG, "Saving day: \n" + day.toString());
 		dbHelper.saveDay(day);
 	}
+	
+	public void saveFoodGroup(AFoodGroup foodGroup) {
+		Log.d(Tags.LOG_TAG, "Saving food group: \n" + foodGroup.toString());
+		dbHelper.saveFoodGroup(foodGroup);
+	}
+	
+	public void deleteFoodGroup(AFoodGroup foodGroup) {
+		dbHelper.deleteFoodGroup(foodGroup.id);
+	}
 
 	public List<ADay> getDaysFromDb() {
 		return dbHelper.fetchAllDayRows();
+	}
+	
+	public List<AFoodGroup> getFoodGroupsFromDb() {
+		return dbHelper.fetchAllFoodGroupRows();
 	}
 
 	public List<ADay> getADayForCalendar(Calendar cal) {
 		return dbHelper.fetchFoodsForDate(cal);
 	}
 
+	public ADay safelyFetchExistingADay(Calendar calendar) {
+		if (hasDayData(this)) {
+			// Try to find the ADay object
+			List<ADay> possibleCurrDays = getADayForCalendar(calendar);
+			if (!possibleCurrDays.isEmpty()) {
+				// We have a current object
+				Log.d(Tags.LOG_TAG, "We have a current day for today.");
+				return possibleCurrDays.get(0);
+			} else {
+				// Instantiate a new object
+				Log.d(Tags.LOG_TAG, "We don't have a current day for today.");
+				ADay retDay = new ADay(calendar, true);
+				saveDay(retDay);
+				return retDay;
+			}
+		} else {
+			// Instantiate a new object
+			Log.d(Tags.LOG_TAG,
+					"We don't even have data! AND We don't have a current day.");
+			ADay retDay = new ADay(calendar, true);
+			saveDay(retDay);
+			return retDay;
+		}
+	}
+
 	public ArrayList<AFood> getAllFoods() {
 		byte[] allFoodsByteArray = readInternalStoragePrivate(Tags.MY_FOODS_FILENAME);
 		String allFoodsRaw = new String(allFoodsByteArray);
 		String[] allFoods = allFoodsRaw.split("\\r?\\n");
-		
+
 		// Parse the String array into an ArrayList<AFood>
-        ArrayList<AFood> allFoodsArrayList = new ArrayList<AFood>();
-        if (allFoods != null) {
-            if (allFoods.length > 5) {
-                for (int i = 0; i < allFoods.length; i += 7) {
-                    AFood food = new AFood();
+		ArrayList<AFood> allFoodsArrayList = new ArrayList<AFood>();
+		if (allFoods != null) {
+			if (allFoods.length > 5) {
+				for (int i = 0; i < allFoods.length; i += 7) {
+					AFood food = new AFood();
 
-                    Log.d(Tags.LOG_TAG, "Name: " + allFoods[i]);
-                    Log.d(Tags.LOG_TAG, "Serving size: " + allFoods[i + 1]);
-                    Log.d(Tags.LOG_TAG, "kCal: " + allFoods[i + 2]);
-                    Log.d(Tags.LOG_TAG, "Protein: " + allFoods[i + 3]);
-                    Log.d(Tags.LOG_TAG, "Carbs: " + allFoods[i + 4]);
-                    Log.d(Tags.LOG_TAG, "Fat: " + allFoods[i + 5]);
+					Log.d(Tags.LOG_TAG, "Name: " + allFoods[i]);
+					Log.d(Tags.LOG_TAG, "Serving size: " + allFoods[i + 1]);
+					Log.d(Tags.LOG_TAG, "kCal: " + allFoods[i + 2]);
+					Log.d(Tags.LOG_TAG, "Protein: " + allFoods[i + 3]);
+					Log.d(Tags.LOG_TAG, "Carbs: " + allFoods[i + 4]);
+					Log.d(Tags.LOG_TAG, "Fat: " + allFoods[i + 5]);
 
-                    food.setFoodName(allFoods[i]);
-                    food.setFoodServingSize(allFoods[i + 1]);
-                    food.setFoodKCal(Float.parseFloat(allFoods[i + 2]));
-                    food.setFoodGramsProtein(Float.parseFloat(allFoods[i + 3]));
-                    food.setFoodGramsCarbs(Float.parseFloat(allFoods[i + 4]));
-                    food.setFoodGramsFat(Float.parseFloat(allFoods[i + 5]));
+					food.setFoodName(allFoods[i]);
+					food.setFoodServingSize(allFoods[i + 1]);
+					food.setFoodKCal(Float.parseFloat(allFoods[i + 2]));
+					food.setFoodGramsProtein(Float.parseFloat(allFoods[i + 3]));
+					food.setFoodGramsCarbs(Float.parseFloat(allFoods[i + 4]));
+					food.setFoodGramsFat(Float.parseFloat(allFoods[i + 5]));
 
-                    allFoodsArrayList.add(food);
-                }                
-            }
-        }
-        
+					allFoodsArrayList.add(food);
+				}
+			}
+		}
+
 		return allFoodsArrayList;
 	}
 

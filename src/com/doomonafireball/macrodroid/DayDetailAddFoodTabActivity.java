@@ -55,9 +55,20 @@ public class DayDetailAddFoodTabActivity extends TabActivity {
 		tabHost.addTab(spec);
 
 		// Do the same for the other tabs
+		intent = new Intent().setClass(this,
+				DayDetailAddFoodMyFoodGroupsTab.class);
+		intent.putExtras(extras);
+
+		spec = tabHost
+				.newTabSpec("my_food_groups")
+				.setIndicator("My Food Groups",
+						res.getDrawable(R.drawable.ic_tab_my_food_groups))
+				.setContent(intent);
+		tabHost.addTab(spec);
+
 		intent = new Intent().setClass(this, DayDetailAddFoodNewFoodTab.class);
 		intent.putExtras(extras);
-		
+
 		spec = tabHost
 				.newTabSpec("new_food")
 				.setIndicator("New Food",

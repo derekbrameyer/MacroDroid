@@ -9,8 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:visibility="gone" >
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/BTN_set"
@@ -28,8 +27,7 @@
         android:layout_height="fill_parent"
         android:layout_above="@id/LL_button_container"
         android:layout_alignParentTop="true"
-        android:fillViewport="true"
-        android:visibility="gone" >
+        android:fillViewport="true" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -43,76 +41,211 @@
 
                 <TextView
                     style="@style/CenteredHeaderTV"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="20dp"
-                    android:text="@string/Macros" />
+                    android:text="@string/My_Measurements" />
+
+                <TextView
+                    style="@style/CenteredSubHeaderTV"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/weight" />
 
                 <TableRow >
 
-                    <TextView
-                        style="@style/MyMacrosLeftColumnTL"
-                        android:text="@string/my_macros_training_kCal_day" />
+                    <EditText
+                        android:id="@+id/ET_body_weight_lbs"
+                        style="@style/TwoColumnCenteredET" />
 
                     <EditText
-                        android:id="@+id/ET_training_kCal"
-                        style="@style/MyMacrosIKnowRightColumnET" />
+                        android:id="@+id/ET_body_weight_kgs"
+                        style="@style/TwoColumnCenteredET" />
                 </TableRow>
 
                 <TableRow >
 
                     <TextView
-                        style="@style/MyMacrosLeftColumnTL"
-                        android:text="@string/my_macros_rest_kCal_day" />
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/lbs" />
+
+                    <TextView
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/kg" />
+                </TableRow>
+
+                <TextView
+                    style="@style/CenteredSubHeaderTV"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/height" />
+
+                <TableRow >
 
                     <EditText
-                        android:id="@+id/ET_rest_kCal"
-                        style="@style/MyMacrosIKnowRightColumnET" />
+                        android:id="@+id/ET_body_height_ins"
+                        style="@style/TwoColumnCenteredET" />
+
+                    <EditText
+                        android:id="@+id/ET_body_height_cm"
+                        style="@style/TwoColumnCenteredET" />
                 </TableRow>
 
                 <TableRow >
 
                     <TextView
-                        style="@style/MyMacrosLeftColumnTL"
-                        android:text="@string/my_macros_deficit" />
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/in" />
+
+                    <TextView
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/cm" />
+                </TableRow>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="10dp" />
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/age"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/gender"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow >
 
                     <EditText
-                        android:id="@+id/ET_deficit"
-                        style="@style/MyMacrosIKnowRightColumnET" />
+                        android:id="@+id/ET_age"
+                        style="@style/TwoColumnCenteredET" />
+
+                    <Spinner
+                        android:id="@+id/SPNR_gender"
+                        style="@style/TwoColumnCenteredET"
+                        android:entries="@array/gender" />
                 </TableRow>
 
                 <TableRow >
 
                     <TextView
-                        style="@style/MyMacrosLeftColumnTL"
-                        android:text="@string/my_macros_protein" />
-
-                    <EditText
-                        android:id="@+id/ET_protein"
-                        style="@style/MyMacrosIKnowRightColumnET" />
-                </TableRow>
-
-                <TableRow >
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/years" />
 
                     <TextView
-                        style="@style/MyMacrosLeftColumnTL"
-                        android:text="@string/my_macros_carbs" />
-
-                    <EditText
-                        android:id="@+id/ET_carbs"
-                        style="@style/MyMacrosIKnowRightColumnET" />
-                </TableRow>
-
-                <TableRow >
-
-                    <TextView
-                        style="@style/MyMacrosLeftColumnTL"
-                        android:text="@string/my_macros_fat" />
-
-                    <EditText
-                        android:id="@+id/ET_fat"
-                        style="@style/MyMacrosIKnowRightColumnET" />
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="" />
                 </TableRow>
             </TableLayout>
+
+            <TextView
+                style="@style/CenteredSubHeaderTV"
+                android:layout_marginTop="10dp"
+                android:text="@string/RMR" />
+
+            <TextView
+                android:id="@+id/TV_calculated_RMR"
+                style="@style/CenteredHeaderTV"
+                android:text="@string/RMR"
+                android:color="@android:color/white" />
+
+            <TextView
+                style="@style/CenteredSubHeaderTV"
+                android:layout_marginTop="10dp"
+                android:text="@string/activity_multiplier" />
+
+            <EditText
+                android:id="@+id/ET_activity_multiplier"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:gravity="center|center_vertical"
+                android:inputType="phone"
+                android:text="1.0"
+                android:textSize="18sp" />
+
+            <TextView
+                style="@style/CenteredSubHeaderTV"
+                android:layout_marginTop="10dp"
+                android:text="@string/BMR" />
+
+            <TextView
+                android:id="@+id/TV_calculated_BMR"
+                style="@style/CenteredHeaderTV"
+                android:text="@string/BMR"
+                android:color="@android:color/white" />
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    style="@style/CenteredSubHeaderTV"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/body_fat" />
+
+                <TableRow >
+
+                    <EditText
+                        android:id="@+id/ET_body_fat"
+                        style="@style/ThreeColumnCenteredET" />
+
+                    <TextView
+                        android:id="@+id/TV_calculated_body_fat_lbs"
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="27" />
+
+                    <TextView
+                        android:id="@+id/TV_calculated_body_fat_kg"
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="12" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/percentage_optional" />
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/lbs" />
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/kg" />
+                </TableRow>
+            </TableLayout>
+
+            <TextView
+                style="@style/CenteredSubHeaderTV"
+                android:layout_marginTop="20dp"
+                android:text="@string/max_deficit" />
+
+            <TextView
+                android:id="@+id/TV_calculated_max_deficit"
+                style="@style/CenteredHeaderTV"
+                android:text="@string/max_deficit"
+                android:color="@android:color/white" />
+
+            <TextView
+                style="@style/CenteredSubHeaderTV"
+                android:layout_marginTop="10dp"
+                android:text="@string/training_day_kCal" />
+
+            <TextView
+                android:id="@+id/TV_calculated_training_day_kCal"
+                style="@style/CenteredHeaderTV"
+                android:text="@string/training_day_kCal"
+                android:color="@android:color/white" />
 
             <TableLayout
                 android:layout_width="fill_parent"
@@ -120,7 +253,7 @@
 
                 <TextView
                     style="@style/CenteredHeaderTV"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/Macro_Conversions" />
 
@@ -157,19 +290,128 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
                     android:gravity="center"
                     android:text="@string/kCal_g"
                     android:textSize="14sp" />
             </TableLayout>
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    style="@style/CenteredSubHeaderTV"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/protein" />
+
+                <TableRow >
+
+                    <EditText
+                        android:id="@+id/ET_protien_grams_per_pound"
+                        style="@style/ThreeColumnCenteredET" />
+
+                    <TextView
+                        android:id="@+id/TV_calculated_protein_g"
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="27" />
+
+                    <TextView
+                        android:id="@+id/TV_calculated_protein_kCal"
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="12" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/g_per_lb_body" />
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/grams" />
+
+                    <TextView
+                        style="@style/ThreeColumnCenteredTV"
+                        android:text="@string/kCal" />
+                </TableRow>
+            </TableLayout>
+
+            <TextView
+                style="@style/CenteredSubHeaderTV"
+                android:layout_marginTop="20dp"
+                android:text="@string/remaining_carb_fat_split" />
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow >
+
+                    <EditText
+                        android:id="@+id/ET_percentage_carbs"
+                        style="@style/TwoColumnCenteredET" />
+
+                    <EditText
+                        android:id="@+id/ET_percentage_carbs"
+                        style="@style/TwoColumnCenteredET" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/percent_carbs" />
+
+                    <TextView
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/percent_fat" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        android:id="@+id/TV_calculated_carbs_g"
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="260" />
+
+                    <TextView
+                        android:id="@+id/TV_calculated_carbs_kCal"
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="1037" />
+
+                    <TextView
+                        android:id="@+id/TV_calculated_fat_g"
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="50" />
+
+                    <TextView
+                        android:id="@+id/TV_calculated_fat_kCal"
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="444" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/grams" />
+
+                    <TextView
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/kCal" />
+
+                    <TextView
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/grams" />
+
+                    <TextView
+                        style="@style/TwoColumnCenteredTV"
+                        android:text="@string/kCal" />
+                </TableRow>
+            </TableLayout>
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center|center_vertical"
-        android:text="COMING SOON."
-        android:textSize="48sp" />
 
 </RelativeLayout>

@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
 	private Button previousBTN;
 	private Button myFoodsBTN;
 	private Button myMacrosBTN;
+	private Button myFoodGroupsBTN;
 	private Button settingsBTN;
 	private Context mContext;
 	private MacroDroidApplication application;
@@ -37,6 +38,7 @@ public class MainActivity extends Activity {
 		previousBTN = (Button) findViewById(R.id.BTN_previous);
 		myFoodsBTN = (Button) findViewById(R.id.BTN_my_foods);
 		myMacrosBTN = (Button) findViewById(R.id.BTN_my_macros);
+		myFoodGroupsBTN = (Button) findViewById(R.id.BTN_my_food_groups);
 		settingsBTN = (Button) findViewById(R.id.BTN_settings);
 
 		todayBTN.setOnClickListener(new OnClickListener() {
@@ -88,6 +90,13 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				startActivity(new Intent(MainActivity.this,
 						MyMacrosActivity.class));
+			}
+		});
+		myFoodGroupsBTN.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainActivity.this,
+						MyFoodGroupsActivity.class));
 			}
 		});
 		settingsBTN.setOnClickListener(new OnClickListener() {

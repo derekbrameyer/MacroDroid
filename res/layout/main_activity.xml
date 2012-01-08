@@ -37,6 +37,11 @@
             android:text="@string/main_activity_my_macros" />
 
         <Button
+            android:id="@+id/BTN_my_food_groups"
+            style="@style/MainButtons"
+            android:text="@string/main_activity_my_food_groups" />
+
+        <Button
             android:id="@+id/BTN_settings"
             style="@style/MainButtons"
             android:text="@string/main_activity_settings" />

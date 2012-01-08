@@ -51,7 +51,7 @@ public class DayDetailAddFoodMyFoodsTab extends Activity {
 
 		myFoodsLV = (ListView) findViewById(R.id.LV_my_foods);
 
-		fetchExistingADay();
+		mADay = application.safelyFetchExistingADay(mCalendar);
 		refreshList();
 
 		myFoodsLV.setOnItemClickListener(new OnItemClickListener() {
@@ -81,7 +81,6 @@ public class DayDetailAddFoodMyFoodsTab extends Activity {
 								mFoods.add(new Pair<Float, AFood>(servingsValue, selectedFood));
 								mADay.setFoods(mFoods);
 								application.saveDay(mADay);
-								// Just changing stuff to re-run
 								finish();
 							}
 						});
@@ -95,30 +94,6 @@ public class DayDetailAddFoodMyFoodsTab extends Activity {
 				alert.show();
 			}
 		});
-	}
-
-	private void fetchExistingADay() {
-		if (application.hasData(mContext)) {
-			// Try to find the ADay object
-			List<ADay> possibleCurrDays = application
-					.getADayForCalendar(mCalendar);
-			if (!possibleCurrDays.isEmpty()) {
-				// We have a current object
-				Log.d(Tags.LOG_TAG, "We have a current day for today.");
-				mADay = possibleCurrDays.get(0);
-			} else {
-				// Instantiate a new object
-				Log.d(Tags.LOG_TAG, "We don't have a current day for today.");
-				mADay = new ADay(mCalendar, true);
-				application.saveDay(mADay);
-			}
-		} else {
-			// Instantiate a new object
-			Log.d(Tags.LOG_TAG,
-					"We don't even have data! AND We don't have a current day.");
-			mADay = new ADay(mCalendar, true);
-			application.saveDay(mADay);
-		}
 	}
 
 	private void refreshList() {
