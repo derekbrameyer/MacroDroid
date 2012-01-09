@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="MacroDroidTheme" parent="Theme.Sherlock">
+        <item name="actionBarSize">48dp</item>
+        <item name="abDivider">@drawable/action_bar_divider</item>
+        <item name="abBackground">@drawable/action_bar_gradient</item>
+        <item name="abTitleTextStyle">@style/TV_action_bar_title</item>
+        <item name="abSubtitleTextStyle">@style/TV_action_bar_subtitle</item>
+    </style>
+
+    <style name="TV_action_bar_title">
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:textColor">@color/action_bar_title_color</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@android:color/white</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+
+    <style name="TV_action_bar_subtitle">
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textColor">@color/action_bar_title_color</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:shadowColor">@android:color/white</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+
     <style name="FullHeightDialog" parent="android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
     </style>

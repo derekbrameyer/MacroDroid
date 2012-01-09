@@ -1,15 +1,16 @@
 package com.doomonafireball.macrodroid;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActionBar;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class MyMacrosActivity extends Activity {
+public class MyMacrosActivity extends FragmentActivity {
     private Button calculateBTN;
     private Button iKnowBTN;
     private TextView noInputTV;
@@ -29,6 +30,12 @@ public class MyMacrosActivity extends Activity {
         setContentView(R.layout.my_macros_activity);
 
         application = ((MacroDroidApplication) getApplication());
+        
+        final ActionBar ab = getSupportActionBar();
+		ab.setDisplayUseLogoEnabled(false);
+		ab.setDisplayHomeAsUpEnabled(false);
+		ab.setDisplayShowHomeEnabled(false);
+		ab.setTitle(getResources().getString(R.string.My_Macros));
 
         calculateBTN = (Button) findViewById(R.id.BTN_calculate);
         iKnowBTN = (Button) findViewById(R.id.BTN_i_know);

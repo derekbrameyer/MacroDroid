@@ -4,6 +4,9 @@ public class Tags {
     // Application logging
     public static final String LOG_TAG = "MacroDroid";
     
+    // External things
+    public static final String PHOTOS_PATH = "MacroDroid/photos";
+    
 	 // Macros SharedPreferences tags
 	public static final String MACROS_TRAINING_KCAL = "macros_training_kcal";
 	public static final String MACROS_REST_KCAL = "macros_rest_kcal";

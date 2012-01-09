@@ -1,21 +1,21 @@
 package com.doomonafireball.macrodroid;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
+import com.exina.android.calendar.CalendarActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.ActionBar;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.DatePicker;
+import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 	private Button todayBTN;
 	private Button previousBTN;
 	private Button myFoodsBTN;
@@ -33,6 +33,12 @@ public class MainActivity extends Activity {
 
 		mContext = this;
 		application = ((MacroDroidApplication) getApplication());
+
+		final ActionBar ab = getSupportActionBar();
+		ab.setDisplayUseLogoEnabled(false);
+		ab.setDisplayHomeAsUpEnabled(false);
+		ab.setDisplayShowHomeEnabled(false);
+		ab.setSubtitle(application.getRandomCompliment());
 
 		todayBTN = (Button) findViewById(R.id.BTN_today);
 		previousBTN = (Button) findViewById(R.id.BTN_previous);
@@ -56,6 +62,11 @@ public class MainActivity extends Activity {
 		previousBTN.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				// Calendar Widget
+				startActivityForResult(new Intent(Intent.ACTION_PICK)
+						.setDataAndType(null, CalendarActivity.MIME_TYPE), 100);
+
+				/*
 				// DatePickerDialog
 				int year = Calendar.getInstance().get(Calendar.YEAR);
 				int month = Calendar.getInstance().get(Calendar.MONTH);
@@ -75,7 +86,7 @@ public class MainActivity extends Activity {
 							}
 
 						}, year, month, date);
-				datePicker.show();
+				datePicker.show();*/
 			}
 		});
 		myFoodsBTN.setOnClickListener(new OnClickListener() {
@@ -106,5 +117,28 @@ public class MainActivity extends Activity {
 
 			}
 		});
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			int year = data.getIntExtra("year", 0); // get number of year
+			int month = data.getIntExtra("month", 0); // get number of month
+														// 0..11
+			int day = data.getIntExtra("day", 0); // get number of day 0..31
+
+			Intent i = new Intent(MainActivity.this, DayDetailActivity.class);
+			i.putExtra("date", day);
+			i.putExtra("month", month);
+			i.putExtra("year", year);
+			startActivity(i);
+		}
+	}
+	
+	@Override
+	public void onResume() {
+		final ActionBar ab = getSupportActionBar();
+		ab.setSubtitle(application.getRandomCompliment());
+		super.onResume();
 	}
 }

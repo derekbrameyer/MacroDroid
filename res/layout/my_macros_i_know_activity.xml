@@ -4,28 +4,9 @@
     android:layout_height="fill_parent"
     android:gravity="center|center_vertical" >
 
-    <LinearLayout
-        android:id="@+id/LL_button_container"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/BTN_set"
-            style="@style/TwoColumnButtons"
-            android:text="@string/Set" />
-
-        <Button
-            android:id="@+id/BTN_cancel"
-            style="@style/TwoColumnButtons"
-            android:text="@string/Cancel" />
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/LL_button_container"
         android:layout_alignParentTop="true"
         android:fillViewport="true" >
 
@@ -38,12 +19,6 @@
             <TableLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" >
-
-                <TextView
-                    style="@style/CenteredHeaderTV"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/Macros" />
 
                 <TableRow >
 
@@ -118,8 +93,8 @@
 
                 <TextView
                     style="@style/CenteredHeaderTV"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/Macro_Conversions" />
 
                 <TableRow >

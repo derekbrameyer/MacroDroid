@@ -4,6 +4,28 @@
         <item>male</item>
         <item>female</item>
     </string-array>
+    <string-array name="compliments">
+        <item>Lookin\' good!</item>
+        <item>Hello good-lookin\'.</item>
+        <item>Hey gorgeous.</item>
+        <item>You look hot.</item>
+        <item>&lt;3 &lt;3 &lt;3</item>
+        <item>;) ;) ;)</item>
+        <item>Whoa. Sexy.</item>
+        <item>Hey hot stuff.</item>
+        <item>\@-&gt;-- (It\'s a rose.  Just for you.)</item>
+        <item>Keep up the good work!</item>
+        <item>Look at you, being all healthy and stuff.</item>
+        <item>Have you been working out?</item>
+        <item>You\'re the greatest phone owner I could ever have.</item>
+        <item>Fact: You look good. Really good.</item>
+        <item>Eating right feels great, doesn\'t it?</item>
+        <item>You look like the lovechild of Bruce Lee and Angelina Jolie.</item>
+        <item>Really really ridiculously good-looking.</item>
+        <item>Serious question: Are you a model?</item>
+        <item>You rock.</item>
+        <item>(╯°□°）╯︵ ┻━┻</item>
+    </string-array>
 
     
 </resources>

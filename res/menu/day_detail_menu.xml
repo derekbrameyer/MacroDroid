@@ -2,8 +2,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/MENU_photos"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:showAsAction="ifRoom"
+        android:title="@string/Photos"/>
+    <item
+        android:id="@+id/MENU_weight"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:showAsAction="ifRoom"
+        android:title="@string/Weight"/>
+    <item
+        android:id="@+id/MENU_add_food"
+        android:icon="@android:drawable/ic_menu_add"
+        android:showAsAction="ifRoom"
+        android:title="@string/Add_Food"
+        android:titleCondensed="@string/Add"/>
+    <item
+        android:id="@+id/MENU_change_day_type"
+        android:icon="@android:drawable/ic_menu_set_as"
+        android:showAsAction="ifRoom"
+        android:title="@string/Change_Day_Type"
+        android:titleCondensed="@string/Day_Type"/>
+    <item
         android:id="@+id/MENU_save_food_group"
-        android:title="Save Food Group"
-        android:titleCondensed="Save"/>
+        android:icon="@android:drawable/ic_menu_save"
+        android:showAsAction="ifRoom"
+        android:title="@string/Save_Food_Group"/>
 
 </menu>

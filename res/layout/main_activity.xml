@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center|center_vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal" >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center|center_vertical"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true" >
 
-        <TextView
-            style="@style/CenteredHeaderTV"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/app_name" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/BTN_today"
-            style="@style/MainButtons"
-            android:text="@string/main_activity_today" />
+            <Button
+                android:id="@+id/BTN_today"
+                style="@style/MainButtons"
+                android:text="@string/main_activity_today" />
 
-        <Button
-            android:id="@+id/BTN_previous"
-            style="@style/MainButtons"
-            android:text="@string/main_activity_previous" />
+            <Button
+                android:id="@+id/BTN_previous"
+                style="@style/MainButtons"
+                android:text="@string/main_activity_previous" />
 
-        <Button
-            android:id="@+id/BTN_my_foods"
-            style="@style/MainButtons"
-            android:text="@string/main_activity_my_foods" />
+            <Button
+                android:id="@+id/BTN_my_foods"
+                style="@style/MainButtons"
+                android:text="@string/main_activity_my_foods" />
 
-        <Button
-            android:id="@+id/BTN_my_macros"
-            style="@style/MainButtons"
-            android:text="@string/main_activity_my_macros" />
+            <Button
+                android:id="@+id/BTN_my_macros"
+                style="@style/MainButtons"
+                android:text="@string/main_activity_my_macros" />
 
-        <Button
-            android:id="@+id/BTN_my_food_groups"
-            style="@style/MainButtons"
-            android:text="@string/main_activity_my_food_groups" />
+            <Button
+                android:id="@+id/BTN_my_food_groups"
+                style="@style/MainButtons"
+                android:text="@string/main_activity_my_food_groups" />
 
-        <Button
-            android:id="@+id/BTN_settings"
-            style="@style/MainButtons"
-            android:text="@string/main_activity_settings" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/BTN_settings"
+                style="@style/MainButtons"
+                android:text="@string/main_activity_settings" />
+        </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+</RelativeLayout>

@@ -4,91 +4,116 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="7" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="14" />
 
     <application
+        android:name=".MacroDroidApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name=".MacroDroidApplication"
-        android:theme="@android:style/Theme.NoTitleBar" >
+        android:theme="@style/MacroDroidTheme" >
         <activity
+            android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
-            android:name=".MainActivity"
             android:screenOrientation="portrait" >
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name"
             android:name=".MyMacrosActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name"
             android:name=".MyMacrosCalculateActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name"
             android:name=".MyMacrosIKnowActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name"
             android:name=".MyFoodsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name"
             android:name=".DayDetailActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name"
             android:name=".DayDetailAddFoodNewFoodTab"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name"
             android:name=".DayDetailAddFoodMyFoodsTab"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name"
             android:name=".DayDetailAddFoodMyFoodGroupsTab"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:theme="@style/FullHeightDialog"
-            android:label="@string/app_name"
             android:name=".MyFoodsAddActivity"
-            android:screenOrientation="portrait" >
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:theme="@style/FullHeightDialog"
-            android:label="@string/app_name"
             android:name=".DayDetailAddFoodTabActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
+        </activity>
+        <activity
             android:name=".MyFoodGroupsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity 
+            android:name="com.exina.android.calendar.CalendarActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.dir/vnd.exina.android.calendar.date" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.dir/vnd.exina.android.calendar.date" />
+            </intent-filter>
         </activity>
     </application>
 

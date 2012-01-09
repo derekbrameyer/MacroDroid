@@ -1,6 +1,7 @@
 package com.doomonafireball.macrodroid;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,8 +13,13 @@ import java.util.List;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 public class MacroDroidApplication extends Application {
 	private static final String MACROS_PREFS = "MacroDroidMacrosPrefs";
@@ -42,6 +48,84 @@ public class MacroDroidApplication extends Application {
 		}
 	}
 
+	public String getRandomCompliment() {
+		String[] complimentArray = getResources().getStringArray(
+				R.array.compliments);
+		int i = (int) (Math.random() * complimentArray.length);
+		return complimentArray[i];
+	}
+
+	public int numPicsForDay(String path, String day) {
+		if (!Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED)) {
+			return 0;
+		} else {
+			File dir = new File(Environment.getExternalStorageDirectory()
+					+ File.separator + path);
+			dir.mkdirs();
+			String[] files = dir.list();
+			int dayCount = 0;
+			for (int i = 0; i < files.length; i++) {
+				String s = files[i];
+				if (s.contains(day)) {
+					dayCount++;
+				}
+			}
+			return dayCount;
+
+		}
+	}
+
+	public int directoryExists(String path) {
+		if (!Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED)) {
+			return -1;
+		} else {
+			File dir = new File(Environment.getExternalStorageDirectory()
+					+ File.separator + path);
+			if (dir.exists()) {
+				return dir.list().length;
+			} else {
+				return -1;
+			}
+		}
+	}
+
+	public String saveBitmapToFile(Bitmap bmp, String path, String filename) {
+		// Make sure to declare WRITE_EXTERNAL_STORAGE permission
+		// bmp - self-explanatory
+		// path - e.g "myapp/firstfolder/secondfolder" (no leading or trailing
+		// seps)
+		// filename - e.g. "081012.png" (no leading seps)
+		// Output would be "sdcard/myapp/firstfolder/secondfolder/081012.png"
+		if (!Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED)) {
+			return "";
+		} else {
+			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+			bmp.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+			File dir = new File(Environment.getExternalStorageDirectory()
+					+ File.separator + path);
+			dir.mkdirs();
+			File f = new File(Environment.getExternalStorageDirectory()
+					+ File.separator + path + File.separator + filename);
+			Log.d(Tags.LOG_TAG, "Filedir: " + f.getAbsolutePath());
+			try {
+				// write the bytes in file
+				FileOutputStream fo = new FileOutputStream(f);
+				fo.write(bytes.toByteArray());
+				sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
+						Uri.parse("file://"
+								+ Environment.getExternalStorageDirectory())));
+				return f.getAbsolutePath();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "";
+			}
+		}
+	}
+
 	public boolean hasDayData(Context ctx) {
 		dbHelper = new Db4oHelper(ctx);
 		if (dbHelper.fetchAllDayRows().isEmpty()) {
@@ -50,7 +134,7 @@ public class MacroDroidApplication extends Application {
 			return true;
 		}
 	}
-	
+
 	public boolean hasFoodGroupData(Context ctx) {
 		dbHelper = new Db4oHelper(ctx);
 		if (dbHelper.fetchAllFoodGroupRows() == null) {
@@ -71,12 +155,12 @@ public class MacroDroidApplication extends Application {
 		Log.d(Tags.LOG_TAG, "Saving day: \n" + day.toString());
 		dbHelper.saveDay(day);
 	}
-	
+
 	public void saveFoodGroup(AFoodGroup foodGroup) {
 		Log.d(Tags.LOG_TAG, "Saving food group: \n" + foodGroup.toString());
 		dbHelper.saveFoodGroup(foodGroup);
 	}
-	
+
 	public void deleteFoodGroup(AFoodGroup foodGroup) {
 		dbHelper.deleteFoodGroup(foodGroup.id);
 	}
@@ -84,7 +168,7 @@ public class MacroDroidApplication extends Application {
 	public List<ADay> getDaysFromDb() {
 		return dbHelper.fetchAllDayRows();
 	}
-	
+
 	public List<AFoodGroup> getFoodGroupsFromDb() {
 		return dbHelper.fetchAllFoodGroupRows();
 	}

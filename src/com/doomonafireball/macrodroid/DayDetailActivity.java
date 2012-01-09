@@ -1,37 +1,41 @@
 package com.doomonafireball.macrodroid;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActionBar;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.Menu;
+import android.support.v4.view.MenuItem;
 import android.util.Log;
 import android.util.Pair;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class DayDetailActivity extends Activity {
+public class DayDetailActivity extends FragmentActivity {
 	private static final String DATE_FORMAT = "MM/dd/yyyy";
+	private static final String SAVE_DATE_FORMAT = "MMddyyyy";
+	private static final int CAMERA_PIC_REQUEST = 1337;
 	private MacroDroidApplication application;
 	private Context mContext;
 	private Calendar mCalendar; // purely for setup
 	private ADay mADay;
-	private TextView dateTV;
-	private Button trainingBTN;
 	private TextView noFoodsYetTV;
 	private TextView caloriesTV;
 	private TextView currentProteinTV;
@@ -40,12 +44,9 @@ public class DayDetailActivity extends Activity {
 	private TextView macroProteinTV;
 	private TextView macroCarbsTV;
 	private TextView macroFatTV;
-	private Button picsBTN;
-	private Button weightBTN;
-	private Button heightBTN;
-	private Button addFoodBTN;
 	private DayDetailFoodsAdapter mFoodsAdapter;
 	private ListView mFoodsLV;
+	private String mFilePath;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -56,9 +57,12 @@ public class DayDetailActivity extends Activity {
 		application = ((MacroDroidApplication) getApplication());
 		mContext = this;
 
+		final ActionBar ab = getSupportActionBar();
+		ab.setDisplayUseLogoEnabled(false);
+		ab.setDisplayHomeAsUpEnabled(false);
+		ab.setDisplayShowHomeEnabled(false);
+		
 		noFoodsYetTV = (TextView) findViewById(R.id.TV_no_foods_yet);
-		dateTV = (TextView) findViewById(R.id.TV_day_detail_date);
-		trainingBTN = (Button) findViewById(R.id.BTN_training_day);
 		caloriesTV = (TextView) findViewById(R.id.TV_day_detail_calories);
 		currentProteinTV = (TextView) findViewById(R.id.TV_day_detail_current_protein);
 		currentCarbsTV = (TextView) findViewById(R.id.TV_day_detail_current_carbs);
@@ -66,10 +70,6 @@ public class DayDetailActivity extends Activity {
 		macroProteinTV = (TextView) findViewById(R.id.TV_day_detail_macro_protein);
 		macroCarbsTV = (TextView) findViewById(R.id.TV_day_detail_macro_carbs);
 		macroFatTV = (TextView) findViewById(R.id.TV_day_detail_macro_fat);
-		picsBTN = (Button) findViewById(R.id.BTN_pics);
-		weightBTN = (Button) findViewById(R.id.BTN_weight);
-		heightBTN = (Button) findViewById(R.id.BTN_height);
-		addFoodBTN = (Button) findViewById(R.id.BTN_add_food);
 		mFoodsLV = (ListView) findViewById(R.id.LV_day_detail_foods);
 
 		// Parse the extras
@@ -92,7 +92,7 @@ public class DayDetailActivity extends Activity {
 	OnItemClickListener mFoodsItemClickListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> av, View v, int position, long id) {
-			// TODO Auto-generated method stub
+			// TODO Quick Options
 			ArrayList<Pair<Float, AFood>> mFoods = mADay.getFoods();
 			mFoods.remove(position);
 			mADay.setFoods(mFoods);
@@ -111,7 +111,12 @@ public class DayDetailActivity extends Activity {
 	private void refreshViews() {
 		// Refresh the date!
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-		dateTV.setText(sdf.format(mADay.getDate().getTime()));
+		final ActionBar ab = getSupportActionBar();
+		ab.setTitle(sdf.format(mADay.getDate().getTime()));
+		// dateTV.setText(sdf.format(mADay.getDate().getTime()));
+
+		SimpleDateFormat sdf2 = new SimpleDateFormat(SAVE_DATE_FORMAT);
+		mFilePath = sdf2.format(mADay.getDate().getTime());
 
 		// Refresh the Views
 		float totalKCal = 0.0f;
@@ -164,116 +169,35 @@ public class DayDetailActivity extends Activity {
 		if (totalKCal > application.macrosPrefs.getFloat(
 				Tags.MACROS_TRAINING_KCAL, 0.0f)) {
 			caloriesTV.setTextColor(Color.RED);
+		} else {
+			caloriesTV.setTextColor(Color.GRAY);
 		}
 		if (totalProtein > application.macrosPrefs.getFloat(
 				Tags.MACROS_PROTEIN, 0.0f)) {
 			currentProteinTV.setTextColor(Color.RED);
+		} else {
+			currentProteinTV.setTextColor(Color.GRAY);
 		}
 		if (totalCarbs > application.macrosPrefs.getFloat(Tags.MACROS_CARBS,
 				0.0f)) {
 			currentCarbsTV.setTextColor(Color.RED);
+		} else {
+			currentCarbsTV.setTextColor(Color.GRAY);
 		}
 		if (totalFat > application.macrosPrefs.getFloat(Tags.MACROS_FAT, 0.0f)) {
 			currentFatTV.setTextColor(Color.RED);
+		} else {
+			currentFatTV.setTextColor(Color.GRAY);
 		}
 
 		// Buttons
-		weightBTN.setText(Float.toString(mADay.getWeight()));
-		weightBTN.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-				alert.setTitle("Weight");
-				// Set an EditText view to get user input
-				final EditText input = new EditText(mContext);
-				input.setText("100.0");
-				alert.setView(input);
-				alert.setPositiveButton("Set",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								Float weight = Float.parseFloat(input.getText()
-										.toString());
-								mADay.setWeight(weight);
-								application.saveDay(mADay);
-								dialog.dismiss();
-								renderDetailInfo();
-							}
-						});
-				alert.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss();
-							}
-						});
-				alert.show();
-			}
-		});
-		heightBTN.setText(Float.toString(mADay.getHeight()));
-		heightBTN.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-				alert.setTitle("Height");
-				// Set an EditText view to get user input
-				final EditText input = new EditText(mContext);
-				input.setText("100.0");
-				alert.setView(input);
-				alert.setPositiveButton("Set",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								Float height = Float.parseFloat(input.getText()
-										.toString());
-								mADay.setHeight(height);
-								application.saveDay(mADay);
-								dialog.dismiss();
-								renderDetailInfo();
-							}
-						});
-				alert.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss();
-							}
-						});
-				alert.show();
-			}
-		});
-		addFoodBTN.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// Convert current date and pass it to intent
-				Intent i = new Intent(DayDetailActivity.this,
-						DayDetailAddFoodTabActivity.class);
-				i.putExtra("date", mADay.getDate().get(Calendar.DATE));
-				i.putExtra("month", mADay.getDate().get(Calendar.MONTH));
-				i.putExtra("year", mADay.getDate().get(Calendar.YEAR));
-				startActivity(i);
-			}
-		});
+		// /weightBTN.setText(Float.toString(mADay.getWeight()));
+
 		if (mADay.isTraining()) {
-			trainingBTN.setText("Training Day");
+			ab.setSubtitle(getResources().getString(R.string.Training_Day));
 		} else {
-			trainingBTN.setText("Rest Day");
+			ab.setSubtitle(getResources().getString(R.string.Rest_Day));
 		}
-		trainingBTN.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (mADay.isTraining()) {
-					mADay.setTraining(false);
-					trainingBTN.setText("Rest Day");
-					application.saveDay(mADay);
-				} else {
-					mADay.setTraining(true);
-					trainingBTN.setText("Training Day");
-					application.saveDay(mADay);
-				}
-			}
-		});
 		mFoodsLV.setOnItemClickListener(mFoodsItemClickListener);
 	}
 
@@ -301,6 +225,29 @@ public class DayDetailActivity extends Activity {
 		alert.show();
 	}
 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == CAMERA_PIC_REQUEST) {
+			Log.d(Tags.LOG_TAG, "CAMERA_PIC_REQUEST result.");
+			Bitmap bmp = (Bitmap) data.getExtras().get("data");
+			String saveBmpResults = application.saveBitmapToFile(
+					bmp,
+					Tags.PHOTOS_PATH,
+					mFilePath
+							+ "_"
+							+ application.numPicsForDay(Tags.PHOTOS_PATH,
+									mFilePath) + ".png");
+			if (saveBmpResults.length() > 0) {
+				Toast.makeText(mContext, "Saved picture to " + saveBmpResults,
+						Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(
+						mContext,
+						"Could not save the picture. Please make sure your SD card is mounted.",
+						Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.day_detail_menu, menu);
@@ -310,8 +257,94 @@ public class DayDetailActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.MENU_photos:
+			if (application.numPicsForDay(Tags.PHOTOS_PATH, mFilePath) > 0) {
+				// We already have some pictures for this day
+				final CharSequence[] items = { "View photos",
+						"Take another photo" };
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle("Choose an option");
+				builder.setItems(items, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int item) {
+						if (item == 0) {
+							Intent intent = new Intent();
+							intent.setAction(Intent.ACTION_VIEW);
+							intent.setDataAndType(Uri.parse("file://"
+									+ File.separator + Tags.PHOTOS_PATH), "image/*");
+							startActivity(intent);
+
+						} else {
+							Intent cameraIntent = new Intent(
+									android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+							startActivityForResult(cameraIntent,
+									CAMERA_PIC_REQUEST);
+						}
+					}
+				});
+				builder.setNegativeButton("Cancel", new OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+				AlertDialog alert = builder.create();
+				alert.show();
+			} else {
+				// We have no pictures for this day
+				Intent cameraIntent = new Intent(
+						android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+			}
+			return false;
+		case R.id.MENU_weight:
+			AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+			alert.setTitle("Weight");
+			// Set an EditText view to get user input
+			final EditText input = new EditText(mContext);
+			input.append("100.0");
+			alert.setView(input);
+			alert.setPositiveButton("Set Weight",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int whichButton) {
+							Float weight = Float.parseFloat(input.getText()
+									.toString());
+							mADay.setWeight(weight);
+							application.saveDay(mADay);
+							dialog.dismiss();
+							renderDetailInfo();
+						}
+					});
+			alert.setNegativeButton("Cancel",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int whichButton) {
+							dialog.dismiss();
+						}
+					});
+			alert.show();
+			return false;
+		case R.id.MENU_add_food:
+			Intent i = new Intent(DayDetailActivity.this,
+					DayDetailAddFoodTabActivity.class);
+			i.putExtra("date", mADay.getDate().get(Calendar.DATE));
+			i.putExtra("month", mADay.getDate().get(Calendar.MONTH));
+			i.putExtra("year", mADay.getDate().get(Calendar.YEAR));
+			startActivity(i);
+			return false;
 		case R.id.MENU_save_food_group:
 			saveToFoodGroup();
+			return false;
+		case R.id.MENU_change_day_type:
+			final ActionBar ab = getSupportActionBar();
+			if (mADay.isTraining()) {
+				mADay.setTraining(false);
+				ab.setSubtitle(getResources().getString(R.string.Rest_Day));
+				application.saveDay(mADay);
+			} else {
+				mADay.setTraining(true);
+				ab.setSubtitle(getResources().getString(R.string.Training_Day));
+				application.saveDay(mADay);
+			}
 			return false;
 		default:
 			return super.onOptionsItemSelected(item);
