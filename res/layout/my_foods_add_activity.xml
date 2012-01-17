@@ -118,14 +118,14 @@
                 android:orientation="horizontal" >
 
                 <Button
-                    android:id="@+id/BTN_save"
-                    style="@style/TwoColumnButtons"
-                    android:text="@string/Save" />
-
-                <Button
                     android:id="@+id/BTN_cancel"
                     style="@style/TwoColumnButtons"
                     android:text="@string/Cancel" />
+
+                <Button
+                    android:id="@+id/BTN_save"
+                    style="@style/TwoColumnButtons"
+                    android:text="@string/Save" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

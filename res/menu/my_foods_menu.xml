@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
+        android:id="@+id/MENU_save_foods"
+        android:icon="@android:drawable/ic_menu_save"
+        android:showAsAction="ifRoom"
+        android:title="@string/Save_Foods"/>
+    <item
         android:id="@+id/MENU_import"
         android:icon="@drawable/ic_menu_archive"
         android:showAsAction="ifRoom"

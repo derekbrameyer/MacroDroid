@@ -19,7 +19,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 public class MacroDroidApplication extends Application {
 	private static final String MACROS_PREFS = "MacroDroidMacrosPrefs";
@@ -236,6 +235,38 @@ public class MacroDroidApplication extends Application {
 		return allFoodsArrayList;
 	}
 
+	public byte[] readFromSdCard() {
+		int len = 1024;
+		byte[] buffer = new byte[len];
+		try {
+			File file = new File(Environment.getExternalStorageDirectory()
+					+ File.separator + "MacroDroid");
+			file.mkdirs();
+			File file2 = new File(Environment.getExternalStorageDirectory()
+					+ File.separator + "MacroDroid" + File.separator
+					+ "myfoods.txt");
+			FileInputStream fis = new FileInputStream(file2);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			int nrb = fis.read(buffer, 0, len);
+			while (nrb != -1) {
+				baos.write(buffer, 0, nrb);
+				nrb = fis.read(buffer, 0, len);
+			}
+			buffer = baos.toByteArray();
+			fis.close();
+		} catch (FileNotFoundException e) {
+			// TODO If not found, write the default_foods.txt res/raw file to it
+			e.printStackTrace();
+			writeInternalStoragePrivate(Tags.MY_FOODS_FILENAME,
+					defaultFoodsToByteArray());
+			return readInternalStoragePrivate(Tags.MY_FOODS_FILENAME);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return buffer;
+	}
+
 	public byte[] readInternalStoragePrivate(String filename) {
 		int len = 1024;
 		byte[] buffer = new byte[len];
@@ -254,11 +285,49 @@ public class MacroDroidApplication extends Application {
 			e.printStackTrace();
 			writeInternalStoragePrivate(Tags.MY_FOODS_FILENAME,
 					defaultFoodsToByteArray());
-			readInternalStoragePrivate(Tags.MY_FOODS_FILENAME);
+			return readInternalStoragePrivate(Tags.MY_FOODS_FILENAME);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return buffer;
+	}
+
+	public void exportFoodsToSdCard(byte[] foods) {
+		if (!Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED)) {
+		} else {
+			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+			File dir = new File(Environment.getExternalStorageDirectory()
+					+ File.separator + "MacroDroid");
+			dir.mkdirs();
+			File f = new File(Environment.getExternalStorageDirectory()
+					+ File.separator + "MacroDroid" + File.separator
+					+ "myfoods.txt");
+			Log.d(Tags.LOG_TAG, "Filedir: " + f.getAbsolutePath());
+			try {
+				// write the bytes in file
+				FileOutputStream fo = new FileOutputStream(f);
+				fo.write(foods);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void writeToSdCard(ArrayList<AFood> foods) {
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			for (int i = 0; i < foods.size(); i++) {
+				AFood f = foods.get(i);
+				baos.write(foodToByteArray(f));
+			}
+			byte[] newFoodList = baos.toByteArray();
+			exportFoodsToSdCard(newFoodList);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void writeInternalStoragePrivate(String filename, byte[] content) {

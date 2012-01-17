@@ -61,7 +61,7 @@ public class DayDetailActivity extends FragmentActivity {
 		ab.setDisplayUseLogoEnabled(false);
 		ab.setDisplayHomeAsUpEnabled(false);
 		ab.setDisplayShowHomeEnabled(false);
-		
+
 		noFoodsYetTV = (TextView) findViewById(R.id.TV_no_foods_yet);
 		caloriesTV = (TextView) findViewById(R.id.TV_day_detail_calories);
 		currentProteinTV = (TextView) findViewById(R.id.TV_day_detail_current_protein);
@@ -228,22 +228,25 @@ public class DayDetailActivity extends FragmentActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CAMERA_PIC_REQUEST) {
 			Log.d(Tags.LOG_TAG, "CAMERA_PIC_REQUEST result.");
-			Bitmap bmp = (Bitmap) data.getExtras().get("data");
-			String saveBmpResults = application.saveBitmapToFile(
-					bmp,
-					Tags.PHOTOS_PATH,
-					mFilePath
-							+ "_"
-							+ application.numPicsForDay(Tags.PHOTOS_PATH,
-									mFilePath) + ".png");
-			if (saveBmpResults.length() > 0) {
-				Toast.makeText(mContext, "Saved picture to " + saveBmpResults,
-						Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(
-						mContext,
-						"Could not save the picture. Please make sure your SD card is mounted.",
-						Toast.LENGTH_SHORT).show();
+			if (data.getExtras() != null) {
+				Bitmap bmp = (Bitmap) data.getExtras().get("data");
+				String saveBmpResults = application.saveBitmapToFile(
+						bmp,
+						Tags.PHOTOS_PATH,
+						mFilePath
+								+ "_"
+								+ application.numPicsForDay(Tags.PHOTOS_PATH,
+										mFilePath) + ".png");
+				if (saveBmpResults.length() > 0) {
+					Toast.makeText(mContext,
+							"Saved picture to " + saveBmpResults,
+							Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(
+							mContext,
+							"Could not save the picture. Please make sure your SD card is mounted.",
+							Toast.LENGTH_SHORT).show();
+				}
 			}
 		}
 	}
@@ -269,8 +272,9 @@ public class DayDetailActivity extends FragmentActivity {
 						if (item == 0) {
 							Intent intent = new Intent();
 							intent.setAction(Intent.ACTION_VIEW);
-							intent.setDataAndType(Uri.parse("file://"
-									+ File.separator + Tags.PHOTOS_PATH), "image/*");
+							intent.setDataAndType(
+									Uri.parse("file://" + File.separator
+											+ Tags.PHOTOS_PATH), "image/*");
 							startActivity(intent);
 
 						} else {
@@ -297,7 +301,7 @@ public class DayDetailActivity extends FragmentActivity {
 			return false;
 		case R.id.MENU_weight:
 			AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-			alert.setTitle("Weight");
+			alert.setTitle("Set Weight");
 			// Set an EditText view to get user input
 			final EditText input = new EditText(mContext);
 			input.append("100.0");

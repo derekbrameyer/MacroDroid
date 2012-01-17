@@ -4,6 +4,8 @@
     <string name="hello">Hello World, MainActivity!</string>
     <string name="activity_multiplier">activity multiplier [1.0-2.0]</string>
     <string name="age">age</string>
+    <string name="import_instructions">To import new foods from a file, edit /sdcard/MacroDroid/myfoods.txt keeping in mind that formatting matters!</string>
+    <string name="export_instructions">Your foods will be exported to /sdcard/MacroDroid/myfoods.txt</string>
     <string name="app_name">MacroDroid</string>
     <string name="body_fat">body fat</string>
     <string name="gender">gender</string>
@@ -57,6 +59,7 @@
     <string name="Rest_Day">Rest Day</string>
     <string name="RMR">RMR</string>
     <string name="Save">Save</string>
+    <string name="Save_Foods">Save Foods</string>
     <string name="Save_Food_Group">Save Food Group</string>
     <string name="total_servings">total servings</string>
     <string name="Serving_Size">Serving Size</string>

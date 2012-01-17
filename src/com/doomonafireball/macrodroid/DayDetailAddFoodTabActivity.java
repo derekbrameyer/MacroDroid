@@ -49,8 +49,7 @@ public class DayDetailAddFoodTabActivity extends TabActivity {
 		// Initialize a TabSpec for each tab and add it to the TabHost
 		spec = tabHost
 				.newTabSpec("my_foods")
-				.setIndicator("My Foods",
-						res.getDrawable(R.drawable.ic_tab_my_foods))
+				.setIndicator("My Foods")
 				.setContent(intent);
 		tabHost.addTab(spec);
 
@@ -61,8 +60,7 @@ public class DayDetailAddFoodTabActivity extends TabActivity {
 
 		spec = tabHost
 				.newTabSpec("my_food_groups")
-				.setIndicator("My Food Groups",
-						res.getDrawable(R.drawable.ic_tab_my_food_groups))
+				.setIndicator("Food Groups")
 				.setContent(intent);
 		tabHost.addTab(spec);
 
@@ -71,8 +69,7 @@ public class DayDetailAddFoodTabActivity extends TabActivity {
 
 		spec = tabHost
 				.newTabSpec("new_food")
-				.setIndicator("New Food",
-						res.getDrawable(R.drawable.ic_tab_new_food))
+				.setIndicator("New Food")
 				.setContent(intent);
 		tabHost.addTab(spec);
 

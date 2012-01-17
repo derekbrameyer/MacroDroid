@@ -104,9 +104,59 @@ public class MyFoodsActivity extends FragmentActivity {
 			return false;
 		case R.id.MENU_import:
 			// TODO Import from file
-			application.writeInternalStoragePrivate(Tags.MY_FOODS_FILENAME,
-					application.defaultFoodsToByteArray());
-			refreshList();
+			AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+			alert.setTitle("Import from file");
+			alert.setMessage(getResources().getString(
+					R.string.import_instructions));
+			alert.setCancelable(true);
+			alert.setIcon(getResources()
+					.getDrawable(R.drawable.ic_menu_archive));
+			alert.setPositiveButton("Import",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							application.writeInternalStoragePrivate(
+									Tags.MY_FOODS_FILENAME,
+									application.readFromSdCard());
+							refreshList();
+							dialog.dismiss();
+						}
+					});
+			alert.setNegativeButton("Cancel",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+			alert.show();
+			return false;
+		case R.id.MENU_save_foods:
+			// TODO Export to file
+			AlertDialog.Builder alert2 = new AlertDialog.Builder(mContext);
+			alert2.setTitle("Export to file");
+			alert2.setMessage(getResources().getString(
+					R.string.export_instructions));
+			alert2.setCancelable(true);
+			alert2.setIcon(getResources()
+					.getDrawable(android.R.drawable.ic_menu_save));
+			alert2.setPositiveButton("Export",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							application.writeToSdCard(myFoodsArrayList);
+							Toast.makeText(mContext, "Exported!", Toast.LENGTH_SHORT).show();
+							dialog.dismiss();
+						}
+					});
+			alert2.setNegativeButton("Cancel",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+			alert2.show();
 			return false;
 		default:
 			return super.onOptionsItemSelected(item);
